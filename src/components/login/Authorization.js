@@ -1,45 +1,29 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { headers } from "../../authorization/headers";
-import LoginPage from "./LoginPage";
+import * as actions from "../../actions/FetchUser";
+import { connect } from "react-redux";
+import Base from "../base/Base";
 
 class AuthorizationPage extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {};
+  componentDidMount() {
+    console.log(this.props.location.search);
+    if (this.props.location.search.length !== 0) {
+      const code = this.props.location.search.split("?code=")[1];
+      this.props.loginUser(code, this.props.history);
+      this.props.history.push("/home");
+    } else {
+      const token = localStorage.jwt;
+      this.props.fetchUser(token, this.props.history);
+    }
   }
 
-  handleSpotifyCode = router => {
-    if (localStorage.getItem("token")) {
-      this.props.history.push("/main");
-    } else {
-      fetch("http://localhost:3000/api/v1/home", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          code: this.props.location.search.split("?code=")[1]
-        })
-      })
-        .then(res => res.json())
-        .then(data => {
-          const { currentUser, code } = data;
-          localStorage.setItem("token", code);
-          this.setState({ currentUser: currentUser["display_name"] }, () =>
-            this.props.history.push("/main")
-          );
-        });
-      return null;
-    }
-    return null;
-  };
-
   render() {
-    return <div>{this.handleSpotifyCode()}</div>;
+    return (
+      <div>
+        <Base />
+      </div>
+    );
   }
 }
 
-export default AuthorizationPage;
+export default connect(() => ({}), actions)(AuthorizationPage);

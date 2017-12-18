@@ -8,7 +8,6 @@ class LoginPage extends React.Component {
         <Button
           animated
           basic
-          inverted
           color="green"
           href="http://localhost:3000/api/v1/sessions"
         >

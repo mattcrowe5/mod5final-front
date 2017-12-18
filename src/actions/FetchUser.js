@@ -29,3 +29,10 @@ export function fetchUser(jwt, history) {
       });
   };
 }
+
+export function logoutUser() {
+  return dispatch => {
+    localStorage.clear();
+    return {};
+  };
+}

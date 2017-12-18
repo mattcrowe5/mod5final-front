@@ -6,14 +6,15 @@ import Base from "../base/Base";
 
 class AuthorizationPage extends React.Component {
   componentDidMount() {
-    console.log(this.props.location.search);
     if (this.props.location.search.length !== 0) {
       const code = this.props.location.search.split("?code=")[1];
       this.props.loginUser(code, this.props.history);
       this.props.history.push("/home");
-    } else {
+    } else if (localStorage.length > 0) {
       const token = localStorage.jwt;
       this.props.fetchUser(token, this.props.history);
+    } else {
+      this.props.history.push("/");
     }
   }
 

@@ -22,6 +22,10 @@ class Base extends React.Component {
       console.log("inside if statement");
     }
     console.log("next props", nextProps);
+    if (localStorage.length !== 0 && nextProps.topArtists.length === 0) {
+      this.props.fetchArtists();
+      console.log("inside artists if statement");
+    }
   }
 
   render() {
@@ -37,9 +41,12 @@ class Base extends React.Component {
 
 function mapStateToProps(state) {
   console.log("top tracks are ", state.topTracks);
+  console.log("top artists are ", state.topArtists);
+
   return {
     currentUser: state.currentUser,
-    topTracks: state.topTracks
+    topTracks: state.topTracks,
+    topArtists: state.topArtists
   };
 }
 

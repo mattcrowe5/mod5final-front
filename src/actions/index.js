@@ -49,3 +49,19 @@ export function fetchTracks() {
       });
   };
 }
+
+export function fetchArtists() {
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/v1/top_artists`, {
+      headers: headers(),
+      method: "POST"
+    })
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: "FETCH_ARTISTS",
+          payload: data.top_artists.items.slice(0, 5)
+        });
+      });
+  };
+}

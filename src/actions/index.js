@@ -36,3 +36,16 @@ export function logoutUser() {
     return {};
   };
 }
+
+export function fetchTracks() {
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/v1/top_tracks`, {
+      headers: headers(),
+      method: "POST"
+    })
+      .then(res => res.json())
+      .then(data => {
+        dispatch({ type: "FETCH_TRACKS", payload: data.top_tracks.items });
+      });
+  };
+}

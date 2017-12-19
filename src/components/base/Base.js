@@ -12,6 +12,10 @@ class Base extends React.Component {
     this.props.history.push("/");
   };
 
+  handleTopTracks = () => {
+    this.props.history.push("/toptracks");
+  };
+
   componentWillReceiveProps(nextProps) {
     if (localStorage.length !== 0 && nextProps.topTracks.length === 0) {
       this.props.fetchTracks();
@@ -25,7 +29,7 @@ class Base extends React.Component {
       <div>
         <p>{this.props.currentUser.display_name}</p>
         <Button onClick={this.handleLogout}>Log Out</Button>
-        <TopTracksList toptracks={this.props.topTracks} />
+        <Button onClick={this.handleTopTracks}>Your Top Tracks</Button>
       </div>
     );
   }

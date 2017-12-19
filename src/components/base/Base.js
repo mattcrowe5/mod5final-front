@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Button } from "semantic-ui-react";
 import * as actions from "../../actions/index";
 import { withRouter } from "react-router-dom";
+import TopTracksList from "../tracks/topTracksList";
 
 class Base extends React.Component {
   handleLogout = () => {
@@ -24,6 +25,7 @@ class Base extends React.Component {
       <div>
         <p>{this.props.currentUser.display_name}</p>
         <Button onClick={this.handleLogout}>Log Out</Button>
+        <TopTracksList toptracks={this.props.topTracks} />
       </div>
     );
   }

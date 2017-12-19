@@ -12,7 +12,7 @@ class Base extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.topTracks.length === 0) {
+    if (localStorage.length !== 0 && nextProps.topTracks.length === 0) {
       this.props.fetchTracks();
       console.log("inside if statement");
     }

@@ -1,4 +1,4 @@
-import { headers } from "../authorization/headers";
+import { headers, relatedArtistsHeaders } from "../authorization/headers";
 
 export function loginUser(code, history) {
   return dispatch => {
@@ -60,8 +60,21 @@ export function fetchArtists() {
       .then(data => {
         dispatch({
           type: "FETCH_ARTISTS",
-          payload: data.top_artists.items.slice(0, 5)
+          payload: data.top_artists.items.slice(0, 15)
         });
+      });
+  };
+}
+
+export function fetchRelatedArtists(id) {
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/v1/related_artists`, {
+      headers: relatedArtistsHeaders(id),
+      method: "POST"
+    })
+      .then(res => res.json())
+      .then(data => {
+        debugger;
       });
   };
 }

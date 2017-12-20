@@ -1,7 +1,5 @@
-export function artistReducer(state = [], action) {
+export function relatedArtistReducer(state = [], action) {
   switch (action.type) {
-    case "FETCH_ARTISTS":
-      return action.payload;
     case "FETCH_RELATED_ARTISTS":
       return action.payload;
     default:

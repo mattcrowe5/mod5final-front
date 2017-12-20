@@ -1,7 +1,7 @@
 import React from "react";
 import { headers } from "../../authorization/headers";
 import { connect } from "react-redux";
-import { Button } from "semantic-ui-react";
+import { Button, Form, Icon } from "semantic-ui-react";
 import * as actions from "../../actions/index";
 import { withRouter } from "react-router-dom";
 import TopTracksList from "../tracks/topTracksList";
@@ -14,6 +14,10 @@ class Base extends React.Component {
 
   handleTopTracks = () => {
     this.props.history.push("/toptracks");
+  };
+
+  handleArtists = () => {
+    this.props.history.push("/topartists");
   };
 
   componentWillReceiveProps(nextProps) {
@@ -31,9 +35,31 @@ class Base extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.props.currentUser.display_name}</p>
-        <Button onClick={this.handleLogout}>Log Out</Button>
-        <Button onClick={this.handleTopTracks}>Your Top Tracks</Button>
+        <p>Welcome, {this.props.currentUser.display_name}!</p>
+        <Button color="green" onClick={this.handleLogout}>
+          Log Out
+        </Button>
+
+        <Button animated color="green" onClick={this.handleTopTracks}>
+          <Button.Content visible>Your Top Tracks</Button.Content>
+          <Button.Content hidden>
+            <Icon name="spotify" />
+          </Button.Content>
+        </Button>
+
+        <Button animated color="green" onClick={this.handleArtists}>
+          <Button.Content visible>Your Top Artists</Button.Content>
+          <Button.Content hidden>
+            <Icon name="spotify" />
+          </Button.Content>
+        </Button>
+
+        <Button animated color="green">
+          <Button.Content visible>Find Shows Near You!</Button.Content>
+          <Button.Content hidden>
+            <Icon name="sound" />
+          </Button.Content>
+        </Button>
       </div>
     );
   }

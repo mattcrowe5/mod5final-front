@@ -1,6 +1,6 @@
-export function artistReducer(state = [], action) {
+export function showReducer(state = [], action) {
   switch (action.type) {
-    case "FETCH_ARTISTS":
+    case "FETCH_SHOWS":
       return action.payload;
     default:
       return state;

@@ -74,7 +74,18 @@ export function fetchRelatedArtists(id) {
     })
       .then(res => res.json())
       .then(data => {
-        debugger;
+        fetchShows(data).then(data => {
+          debugger;
+        });
       });
   };
+}
+
+function fetchShows(relatedArtists) {
+  console.log("in  nested function");
+  return fetch("http://localhost:3000/api/v1/shows", {
+    headers: headers(),
+    method: "POST",
+    body: JSON.stringify(relatedArtists)
+  }).then(res => res.json());
 }

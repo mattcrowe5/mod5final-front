@@ -20,6 +20,10 @@ class Base extends React.Component {
     this.props.history.push("/topartists");
   };
 
+  handleShows = () => {
+    this.props.history.push("/shows");
+  };
+
   componentWillReceiveProps(nextProps) {
     if (localStorage.length !== 0 && nextProps.topTracks.length === 0) {
       this.props.fetchTracks();
@@ -54,7 +58,7 @@ class Base extends React.Component {
           </Button.Content>
         </Button>
 
-        <Button animated color="green">
+        <Button animated color="green" onClick={this.handleShows}>
           <Button.Content visible>Find Shows Near You!</Button.Content>
           <Button.Content hidden>
             <Icon name="sound" />

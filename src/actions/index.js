@@ -1,4 +1,4 @@
-import { headers, relatedArtistsHeaders } from "../authorization/headers";
+import { headers } from "../authorization/headers";
 
 export function loginUser(code, history) {
   return dispatch => {
@@ -66,11 +66,12 @@ export function fetchArtists() {
   };
 }
 
-export function fetchRelatedArtists(id) {
+export const fetchRelatedArtists = state => {
   return dispatch => {
     return fetch(`http://localhost:3000/api/v1/related_artists`, {
-      headers: relatedArtistsHeaders(id),
-      method: "POST"
+      headers: headers(),
+      method: "POST",
+      body: JSON.stringify(state)
     })
       .then(res => res.json())
       .then(data => {
@@ -79,7 +80,7 @@ export function fetchRelatedArtists(id) {
         });
       });
   };
-}
+};
 
 function fetchShows(relatedArtists) {
   console.log("in  nested function");

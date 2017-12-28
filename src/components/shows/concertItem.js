@@ -14,7 +14,7 @@ const ConcertItem = props => {
                 <Item.Header>{show.concert}</Item.Header>
                 <Item.Meta>{show.artist}</Item.Meta>
                 <Item.Description>
-                  {Date(show.date).slice(0, 15)} {show.time}
+                  {show.date} <br /> {show.time}
                 </Item.Description>
                 <Item.Extra as="a" href={show.link} target="_blank">
                   Link to Show

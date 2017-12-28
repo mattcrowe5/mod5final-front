@@ -76,7 +76,7 @@ export const fetchRelatedArtists = state => {
       .then(res => res.json())
       .then(data => {
         fetchShows(data).then(data => {
-          debugger;
+          dispatch({ type: "FETCH_SHOWS", payload: data.shows });
         });
       });
   };

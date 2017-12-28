@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Input, Button, Dropdown, Container } from "semantic-ui-react";
 import * as actions from "../../actions/index";
+import ConcertItem from "./concertItem";
 
 const cityOptions = [
   { key: 1, text: "New York", value: "New York" },
@@ -69,16 +70,27 @@ class Shows extends Component {
             <Button type="submit">Submit</Button>
           </Form>
         </Container>
+        {!!this.props.shows ? (
+          <div>
+            <h3>Shows You Might Like</h3>
+            <ConcertItem shows={this.props.shows} />
+          </div>
+        ) : null}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
+  console.log("redux state is: ", state);
   let artists = state.topArtists.map(artist => {
     return { key: artist.id, text: artist.name, value: artist.id };
   });
-  return { artists, currentUser: state.currentUser };
+  if (!!state.shows && state.shows.length > 0) {
+    return { artists, currentUser: state.currentUser, shows: state.shows };
+  } else {
+    return { artists, currentUser: state.currentUser };
+  }
 };
 
 export default connect(mapStateToProps, actions)(Shows);

@@ -75,18 +75,34 @@ export const fetchRelatedArtists = state => {
     })
       .then(res => res.json())
       .then(data => {
-        fetchShows(data).then(data => {
+        fetchShows(data, dispatch).then(data => {
           dispatch({ type: "FETCH_SHOWS", payload: data.shows });
         });
       });
   };
 };
 
-function fetchShows(relatedArtists) {
+function fetchShows(relatedArtists, dispatch) {
   console.log("in  nested function");
+  dispatch({
+    type: "FETCH_RELATED_ARTISTS",
+    payload: relatedArtists.related_artists
+  });
   return fetch("http://localhost:3000/api/v1/shows", {
     headers: headers(),
     method: "POST",
     body: JSON.stringify(relatedArtists)
   }).then(res => res.json());
 }
+
+export const loadAction = () => {
+  return dispatch => {
+    dispatch({ type: "LOADING", payload: true });
+  };
+};
+
+export const clearShows = () => {
+  return dispatch => {
+    dispatch({ type: "CLEAR_SHOWS", payload: [] });
+  };
+};

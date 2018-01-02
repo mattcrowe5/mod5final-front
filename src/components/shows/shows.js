@@ -3,6 +3,17 @@ import { connect } from "react-redux";
 import { Form, Input, Button, Dropdown, Container } from "semantic-ui-react";
 import * as actions from "../../actions/index";
 import ConcertItem from "./concertItem";
+import Load from "./loader";
+import NoShowMessage from "./noShowMessage";
+
+const Loader = props => {
+  console.log("loader props", props);
+  if (props.loading === "done" && props.shows === null) {
+    return <NoShowMessage />;
+  } else {
+    return <Load />;
+  }
+};
 
 const cityOptions = [
   { key: 1, text: "New York", value: "New York" },
@@ -10,7 +21,9 @@ const cityOptions = [
   { key: 3, text: "Boston", value: "Boston" },
   { key: 4, text: "Philadelphia", value: "Philadelphia" },
   { key: 5, text: "San Diego", value: "San Diego" },
-  { key: 6, text: "Austin", value: "Austin" }
+  { key: 6, text: "Austin", value: "Austin" },
+  { key: 7, text: "Seattle", value: "Seattle" },
+  { key: 8, text: "Washington DC", value: "Washington" }
 ];
 
 class Shows extends Component {
@@ -23,9 +36,11 @@ class Shows extends Component {
     };
   }
 
-  handleSubmit = ev => {
+  handleSubmit = (ev, dispatch) => {
     ev.preventDefault();
     console.log("in submit", this.state.artist_id, this.props);
+    this.props.clearShows();
+    this.props.loadAction();
     this.props.fetchRelatedArtists(this.state);
   };
 
@@ -69,10 +84,15 @@ class Shows extends Component {
             </Form.Field>
             <Button type="submit">Submit</Button>
           </Form>
+          {this.props.loading === true || this.props.loading === "done" ? (
+            <Loader
+              shows={this.props.shows || null}
+              loading={this.props.loading}
+            />
+          ) : null}
         </Container>
-        {!!this.props.shows ? (
+        {!!this.props.shows && this.props.shows.length > 0 ? (
           <div>
-            <h3>Shows You Might Like</h3>
             <ConcertItem shows={this.props.shows} />
           </div>
         ) : null}
@@ -87,9 +107,21 @@ const mapStateToProps = state => {
     return { key: artist.id, text: artist.name, value: artist.id };
   });
   if (!!state.shows && state.shows.length > 0) {
-    return { artists, currentUser: state.currentUser, shows: state.shows };
+    return {
+      artists,
+      currentUser: state.currentUser,
+      shows: state.shows,
+      relatedArtists: state.relatedArtists,
+      loading: false
+    };
   } else {
-    return { artists, currentUser: state.currentUser };
+    return {
+      artists,
+      currentUser: state.currentUser,
+      loading: state.loading,
+      relatedArtists: state.relatedArtists,
+      loading: state.loading
+    };
   }
 };
 

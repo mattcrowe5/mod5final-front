@@ -1,14 +1,17 @@
 import React from "react";
-import { Image, Item } from "semantic-ui-react";
+import { Image, Item, Button, Icon, Container } from "semantic-ui-react";
+import SaveShowButton from "./saveShow";
 
 const ConcertItem = props => {
   console.log("concert item props ", props);
   return (
-    <Item.Group>
-      {props.shows.map(show => {
-        return (
-          <div>
-            <Item key={show.concert}>
+    <Container>
+      <br />
+      <h3>Shows You Might Like</h3>
+      <Item.Group divided>
+        {props.shows.map(show => {
+          return (
+            <Item>
               <Item.Image size="small" src={show.photo} />
               <Item.Content>
                 <Item.Header>{show.concert}</Item.Header>
@@ -16,16 +19,26 @@ const ConcertItem = props => {
                 <Item.Description>
                   {show.date} <br /> {show.time}
                 </Item.Description>
-                <Item.Extra as="a" href={show.link} target="_blank">
-                  Link to Show
+                <Item.Extra>
+                  <Button
+                    color="green"
+                    floated="right"
+                    as="a"
+                    href={show.link}
+                    target="_blank"
+                  >
+                    <Icon name="ticket" />
+                    Buy tickets
+                  </Button>
+                  <SaveShowButton />
                 </Item.Extra>
               </Item.Content>
+              <br />
             </Item>
-            <br />
-          </div>
-        );
-      })}
-    </Item.Group>
+          );
+        })}
+      </Item.Group>
+    </Container>
   );
 };
 

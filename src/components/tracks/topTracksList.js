@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import { Card, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
+import * as actions from "../../actions/index";
 
 class TopTracksList extends Component {
+  componentDidMount() {
+    if (this.props.toptracks.length === 0) {
+      this.props.fetchTracks();
+    }
+  }
+
   render() {
     return (
       <Card.Group itemsPerRow={6}>
@@ -30,4 +37,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(TopTracksList);
+export default connect(mapStateToProps, actions)(TopTracksList);

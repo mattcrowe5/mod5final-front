@@ -36,6 +36,12 @@ class Shows extends Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.artists.length === 0) {
+      this.props.fetchArtists();
+    }
+  }
+
   handleSubmit = (ev, dispatch) => {
     ev.preventDefault();
     console.log("in submit", this.state.artist_id, this.props);

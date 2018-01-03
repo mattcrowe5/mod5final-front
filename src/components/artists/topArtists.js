@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import { Card, Image, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
+import * as actions from "../../actions/index";
 
 class TopArtists extends Component {
+  componentDidMount() {
+    if (this.props.topArtists.length === 0) {
+      this.props.fetchArtists();
+    }
+  }
+
   render() {
     return (
       <Container>
@@ -29,4 +36,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(TopArtists);
+export default connect(mapStateToProps, actions)(TopArtists);

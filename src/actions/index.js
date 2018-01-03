@@ -58,10 +58,9 @@ export function fetchArtists() {
     })
       .then(res => res.json())
       .then(data => {
-        debugger;
         dispatch({
           type: "FETCH_ARTISTS",
-          payload: data.top_artists.items.slice(0, 15)
+          payload: data.top_artists.items
         });
       });
   };

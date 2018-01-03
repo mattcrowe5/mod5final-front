@@ -4,7 +4,7 @@ import { Dimmer, Loader, Segment } from "semantic-ui-react";
 const Load = () => (
   <div>
     <Loader active size="huge">
-      Finding Shows For You
+      Searching For Shows
     </Loader>
   </div>
 );

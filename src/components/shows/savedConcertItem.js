@@ -6,8 +6,6 @@ const SavedConcertItem = props => {
   console.log("concert item props ", props);
   return (
     <Container>
-      <br />
-      <h3>Shows You Might Like</h3>
       <Item.Group divided>
         {props.shows.map(show => {
           return (

@@ -12,7 +12,7 @@ class TopTracksList extends Component {
 
   render() {
     return (
-      <Card.Group itemsPerRow={6}>
+      <Card.Group itemsPerRow={5}>
         {this.props.toptracks.map(track => (
           <Card>
             <Image src={track.album.images[0].url} />

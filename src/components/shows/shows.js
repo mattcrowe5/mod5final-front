@@ -5,6 +5,7 @@ import * as actions from "../../actions/index";
 import ConcertItem from "./concertItem";
 import Load from "./loader";
 import NoShowMessage from "./noShowMessage";
+import MainMenu from "../style/menu";
 
 const Loader = props => {
   console.log("loader props", props);
@@ -62,7 +63,9 @@ class Shows extends Component {
     console.log(this.props);
     return (
       <div>
-        <Container textAlign="center">
+        <MainMenu />
+        <br />
+        <Container text textAlign="center">
           <Form onSubmit={this.handleSubmit}>
             <Form.Field>
               <label>Choose a Top Artist</label>

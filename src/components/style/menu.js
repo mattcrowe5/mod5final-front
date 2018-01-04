@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import { Button, Menu, Image } from "semantic-ui-react";
+import { Button, Menu, Image, Icon } from "semantic-ui-react";
 import * as actions from "../../actions/index";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 class MainMenu extends Component {
+  handleHome = () => {
+    this.props.history.push("/home");
+  };
+
   handleLogout = () => {
     this.props.logoutUser();
     this.props.history.push("/");
@@ -26,11 +30,15 @@ class MainMenu extends Component {
             size="tiny"
           />
         </Menu.Item>
-        <Menu.Item>Welcome, {this.props.user}!</Menu.Item>
+        <Menu.Item>Welcome, {this.props.currentUser}!</Menu.Item>
 
         <Menu.Menu position="right">
+          <Menu.Item onClick={this.handleHome}>
+            <Icon name="home" size="large" />
+            Home
+          </Menu.Item>
           <Menu.Item>
-            <Button color="green" onClick={this.handleLogout}>
+            <Button color="black" onClick={this.handleLogout}>
               Log Out
             </Button>
           </Menu.Item>
@@ -40,4 +48,10 @@ class MainMenu extends Component {
   }
 }
 
-export default withRouter(connect(null, actions)(MainMenu));
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser.display_name
+  };
+}
+
+export default withRouter(connect(mapStateToProps, actions)(MainMenu));

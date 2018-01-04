@@ -1,25 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button, Icon, Segment } from "semantic-ui-react";
+import { Button, Icon, Segment, Modal, Container } from "semantic-ui-react";
 import * as actions from "../../actions/index";
 import { withRouter } from "react-router-dom";
 import MainMenu from "../style/menu";
+import TopTrackList from "../tracks/topTracksList";
+import TopArtists from "../artists/topArtists";
+import SavedShows from "../shows/SavedShows";
 
 class Base extends React.Component {
-  handleTopTracks = () => {
-    this.props.history.push("/toptracks");
-  };
-
-  handleArtists = () => {
-    this.props.history.push("/topartists");
-  };
-
   handleShows = () => {
     this.props.history.push("/shows");
-  };
-
-  handleSavedShows = () => {
-    this.props.history.push("/saved");
   };
 
   // componentWillReceiveProps(nextProps) {
@@ -37,46 +28,78 @@ class Base extends React.Component {
   render() {
     return (
       <div>
-        <MainMenu user={this.props.currentUser.display_name} />
+        <MainMenu />
         <Segment
           textAlign="center"
           vertical
           style={{
             marginTop: "0px",
-            minHeight: 1200,
+            minHeight: 900,
             backgroundImage:
               "url(https://images3.alphacoders.com/151/thumb-1920-151409.jpg)",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat"
           }}
         >
-          <Button animated color="green" onClick={this.handleTopTracks}>
-            <Button.Content visible>Your Top Tracks</Button.Content>
-            <Button.Content hidden>
-              <Icon name="spotify" />
-            </Button.Content>
-          </Button>
+          <Container style={{ marginTop: "25%" }}>
+            <Modal
+              scrolling
+              trigger={
+                <Button animated color="green">
+                  <Button.Content visible>Your Top Tracks</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="spotify" />
+                  </Button.Content>
+                </Button>
+              }
+            >
+              <Modal.Header> Your Top Songs</Modal.Header>
+              <Modal.Content>
+                <TopTrackList />
+              </Modal.Content>
+            </Modal>
 
-          <Button animated color="green" onClick={this.handleArtists}>
-            <Button.Content visible>Your Top Artists</Button.Content>
-            <Button.Content hidden>
-              <Icon name="spotify" />
-            </Button.Content>
-          </Button>
+            <Modal
+              scrolling
+              trigger={
+                <Button animated color="green">
+                  <Button.Content visible>Your Top Artists</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="spotify" />
+                  </Button.Content>
+                </Button>
+              }
+            >
+              <Modal.Header> Your Top Artists</Modal.Header>
+              <Modal.Content>
+                <TopArtists />
+              </Modal.Content>
+            </Modal>
 
-          <Button animated color="green" onClick={this.handleShows}>
-            <Button.Content visible>Find Shows Near You!</Button.Content>
-            <Button.Content hidden>
-              <Icon name="sound" />
-            </Button.Content>
-          </Button>
+            <Button animated color="green" onClick={this.handleShows}>
+              <Button.Content visible>Find Shows Near You!</Button.Content>
+              <Button.Content hidden>
+                <Icon name="sound" />
+              </Button.Content>
+            </Button>
 
-          <Button animated color="green" onClick={this.handleSavedShows}>
-            <Button.Content visible>Your Shows</Button.Content>
-            <Button.Content hidden>
-              <Icon name="hand peace" />
-            </Button.Content>
-          </Button>
+            <Modal
+              scrolling
+              trigger={
+                <Button animated color="green">
+                  <Button.Content visible>Your Shows</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="hand peace" />
+                  </Button.Content>
+                </Button>
+              }
+            >
+              <Modal.Header> Your Shows</Modal.Header>
+              <Modal.Content>
+                <SavedShows />
+              </Modal.Content>
+            </Modal>
+          </Container>
         </Segment>
       </div>
     );
@@ -84,9 +107,6 @@ class Base extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log("top tracks are ", state.topTracks);
-  console.log("top artists are ", state.topArtists);
-
   return {
     currentUser: state.currentUser,
     topTracks: state.topTracks,

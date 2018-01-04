@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Item, Button, Icon, Container } from "semantic-ui-react";
+import { Item, Button, Icon, Container } from "semantic-ui-react";
 import SaveShowButton from "./saveShow";
 
 const ConcertItem = props => {
@@ -17,7 +17,7 @@ const ConcertItem = props => {
                 <Item.Header>{show.concert}</Item.Header>
                 <Item.Meta>{show.artist}</Item.Meta>
                 <Item.Description>
-                  {show.date} <br /> {show.time}
+                  {show.date} <br /> {show.time} @ {show.venue}
                 </Item.Description>
                 <Item.Extra>
                   <Button
@@ -30,7 +30,7 @@ const ConcertItem = props => {
                     <Icon name="ticket" />
                     Buy tickets
                   </Button>
-                  <SaveShowButton />
+                  <SaveShowButton show={show} />
                 </Item.Extra>
               </Item.Content>
               <br />

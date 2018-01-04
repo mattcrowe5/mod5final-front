@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Form, Input, Button, Dropdown, Container } from "semantic-ui-react";
+import { Form, Button, Dropdown, Container } from "semantic-ui-react";
 import * as actions from "../../actions/index";
 import ConcertItem from "./concertItem";
 import Load from "./loader";

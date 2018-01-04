@@ -1,10 +1,21 @@
 import React, { Component } from "react";
-import { Button, Label } from "semantic-ui-react";
+import { Label } from "semantic-ui-react";
+
+import { connect } from "react-redux";
+import { saveShow, removeShow } from "../../actions/index";
 
 class SaveShowButton extends Component {
   state = { saved: false };
 
-  handleClick = () => this.setState({ saved: !this.state.saved });
+  handleSaveClick = () => {
+    saveShow(this.props.show, localStorage["jwt"]);
+    this.setState({ saved: !this.state.saved });
+  };
+
+  handleRemoveClick = () => {
+    removeShow(this.props.show, localStorage["jwt"]);
+    this.setState({ saved: !this.state.saved });
+  };
 
   render() {
     return this.state.saved === false ? (
@@ -12,14 +23,14 @@ class SaveShowButton extends Component {
         icon="bookmark"
         content="Save Show"
         color="green"
-        onClick={this.handleClick}
+        onClick={this.handleSaveClick}
       />
     ) : (
       <Label
         icon="remove bookmark"
         content="Remove From Saved Shows"
         color="black"
-        onClick={this.handleClick}
+        onClick={this.handleRemoveClick}
       />
     );
   }

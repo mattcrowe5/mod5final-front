@@ -1,10 +1,8 @@
 import React from "react";
-import { headers } from "../../authorization/headers";
 import { connect } from "react-redux";
-import { Button, Form, Icon } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 import * as actions from "../../actions/index";
 import { withRouter } from "react-router-dom";
-import TopTracksList from "../tracks/topTracksList";
 
 class Base extends React.Component {
   handleLogout = () => {

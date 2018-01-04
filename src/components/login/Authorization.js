@@ -1,5 +1,4 @@
 import React from "react";
-import { Route } from "react-router-dom";
 import * as actions from "../../actions/index";
 import { connect } from "react-redux";
 import Base from "../base/Base";

@@ -106,3 +106,39 @@ export const clearShows = () => {
     dispatch({ type: "CLEAR_SHOWS", payload: [] });
   };
 };
+
+export function saveShow(show, token) {
+  return dispatch => {
+    fetch("http://localhost:3000/api/v1/save_show", {
+      headers: headers(),
+      method: "POST",
+      body: JSON.stringify({ show, token })
+    })
+      .then(res => res.json())
+      .then(data => dispatch({ type: "SAVE_SHOW", payload: data }));
+  };
+}
+
+export function removeShow(show, token) {
+  return dispatch => {
+    fetch("http://localhost:3000/api/v1/remove_show", {
+      headers: headers(),
+      method: "POST",
+      body: JSON.stringify({ show, token })
+    })
+      .then(res => res.json())
+      .then(data => dispatch({ type: "DELETE_SHOW", payload: data }));
+  };
+}
+
+export function fetchSavedShows(token) {
+  return dispatch => {
+    fetch("http://localhost:3000/api/v1/index", {
+      headers: headers(),
+      method: "POST",
+      body: JSON.stringify({ token })
+    })
+      .then(res => res.json())
+      .then(data => dispatch({ type: "FETCH_SAVED", payload: data }));
+  };
+}

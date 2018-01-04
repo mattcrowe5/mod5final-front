@@ -5,6 +5,7 @@ import { artistReducer } from "./artistReducer";
 import { relatedArtistReducer } from "./relatedArtistReducer";
 import { showReducer } from "./showReducer";
 import { loadReducer } from "./loadReducer";
+import { savedShowReducer } from "./savedShowReducer";
 
 const rootReducer = combineReducers({
   currentUser: userReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   topArtists: artistReducer,
   relatedArtists: relatedArtistReducer,
   shows: showReducer,
-  loading: loadReducer
+  loading: loadReducer,
+  savedShows: savedShowReducer
 });
 
 export default rootReducer;

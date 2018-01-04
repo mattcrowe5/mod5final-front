@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button, Icon } from "semantic-ui-react";
+import { Button, Icon, Segment } from "semantic-ui-react";
 import * as actions from "../../actions/index";
 import { withRouter } from "react-router-dom";
+import MainMenu from "../style/menu";
 
 class Base extends React.Component {
-  handleLogout = () => {
-    this.props.logoutUser();
-    this.props.history.push("/");
-  };
-
   handleTopTracks = () => {
     this.props.history.push("/toptracks");
   };
@@ -22,46 +18,66 @@ class Base extends React.Component {
     this.props.history.push("/shows");
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (localStorage.length !== 0 && nextProps.topTracks.length === 0) {
-      this.props.fetchTracks();
-      console.log("inside if statement");
-    }
-    console.log("next props", nextProps);
-    if (localStorage.length !== 0 && nextProps.topArtists.length === 0) {
-      this.props.fetchArtists();
-      console.log("inside artists if statement");
-    }
-  }
+  handleSavedShows = () => {
+    this.props.history.push("/saved");
+  };
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (localStorage.length !== 0 && nextProps.topTracks.length === 0) {
+  //     this.props.fetchTracks();
+  //     console.log("inside if statement");
+  //   }
+  //   console.log("next props", nextProps);
+  //   if (localStorage.length !== 0 && nextProps.topArtists.length === 0) {
+  //     this.props.fetchArtists();
+  //     console.log("inside artists if statement");
+  //   }
+  // }
 
   render() {
     return (
       <div>
-        <p>Welcome, {this.props.currentUser.display_name}!</p>
-        <Button color="green" onClick={this.handleLogout}>
-          Log Out
-        </Button>
+        <MainMenu user={this.props.currentUser.display_name} />
+        <Segment
+          textAlign="center"
+          vertical
+          style={{
+            marginTop: "0px",
+            minHeight: 1200,
+            backgroundImage:
+              "url(https://images3.alphacoders.com/151/thumb-1920-151409.jpg)",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat"
+          }}
+        >
+          <Button animated color="green" onClick={this.handleTopTracks}>
+            <Button.Content visible>Your Top Tracks</Button.Content>
+            <Button.Content hidden>
+              <Icon name="spotify" />
+            </Button.Content>
+          </Button>
 
-        <Button animated color="green" onClick={this.handleTopTracks}>
-          <Button.Content visible>Your Top Tracks</Button.Content>
-          <Button.Content hidden>
-            <Icon name="spotify" />
-          </Button.Content>
-        </Button>
+          <Button animated color="green" onClick={this.handleArtists}>
+            <Button.Content visible>Your Top Artists</Button.Content>
+            <Button.Content hidden>
+              <Icon name="spotify" />
+            </Button.Content>
+          </Button>
 
-        <Button animated color="green" onClick={this.handleArtists}>
-          <Button.Content visible>Your Top Artists</Button.Content>
-          <Button.Content hidden>
-            <Icon name="spotify" />
-          </Button.Content>
-        </Button>
+          <Button animated color="green" onClick={this.handleShows}>
+            <Button.Content visible>Find Shows Near You!</Button.Content>
+            <Button.Content hidden>
+              <Icon name="sound" />
+            </Button.Content>
+          </Button>
 
-        <Button animated color="green" onClick={this.handleShows}>
-          <Button.Content visible>Find Shows Near You!</Button.Content>
-          <Button.Content hidden>
-            <Icon name="sound" />
-          </Button.Content>
-        </Button>
+          <Button animated color="green" onClick={this.handleSavedShows}>
+            <Button.Content visible>Your Shows</Button.Content>
+            <Button.Content hidden>
+              <Icon name="hand peace" />
+            </Button.Content>
+          </Button>
+        </Segment>
       </div>
     );
   }

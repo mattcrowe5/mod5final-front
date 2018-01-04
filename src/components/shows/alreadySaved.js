@@ -4,8 +4,8 @@ import { Label } from "semantic-ui-react";
 import { connect } from "react-redux";
 import * as actions from "../../actions/index";
 
-class SaveShowButton extends Component {
-  state = { saved: false };
+class AlreadySavedButton extends Component {
+  state = { saved: true };
 
   handleSaveClick = () => {
     this.props.saveShow(this.props.show, localStorage["jwt"]);
@@ -36,4 +36,4 @@ class SaveShowButton extends Component {
   }
 }
 
-export default connect(null, actions)(SaveShowButton);
+export default connect(null, actions)(AlreadySavedButton);

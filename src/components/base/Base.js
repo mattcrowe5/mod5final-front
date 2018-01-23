@@ -34,7 +34,7 @@ class Base extends React.Component {
           vertical
           style={{
             marginTop: "0px",
-            minHeight: 900,
+            minHeight: 1000,
             backgroundImage:
               "url(https://images3.alphacoders.com/151/thumb-1920-151409.jpg)",
             backgroundSize: "cover",

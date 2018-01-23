@@ -41,6 +41,7 @@ class Shows extends Component {
     if (this.props.artists.length === 0) {
       this.props.fetchArtists();
     }
+    this.props.fetchUser(localStorage.jwt);
   }
 
   handleSubmit = (ev, dispatch) => {

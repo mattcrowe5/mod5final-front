@@ -1,8 +1,11 @@
 import { headers } from "../authorization/headers";
 
+let deployedURL = "https://gentle-garden-21695.herokuapp.com";
+let local = "http://localhost:3000";
+
 export function loginUser(code, history) {
   return dispatch => {
-    return fetch("http://localhost:3000/api/v1/home", {
+    return fetch(`${local}/api/v1/home`, {
       method: "POST",
       headers: headers(),
       body: JSON.stringify({ code })
@@ -18,7 +21,7 @@ export function loginUser(code, history) {
 
 export function fetchUser(jwt, history) {
   return dispatch => {
-    return fetch("http://localhost:3000/api/v1/fetch_user", {
+    return fetch(`${local}/api/v1/fetch_user`, {
       method: "POST",
       headers: headers(),
       body: JSON.stringify({ jwt })
@@ -39,7 +42,7 @@ export function logoutUser() {
 
 export function fetchTracks() {
   return dispatch => {
-    return fetch(`http://localhost:3000/api/v1/top_tracks`, {
+    return fetch(`${local}/api/v1/top_tracks`, {
       headers: headers(),
       method: "POST"
     })
@@ -52,7 +55,7 @@ export function fetchTracks() {
 
 export function fetchArtists() {
   return dispatch => {
-    return fetch(`http://localhost:3000/api/v1/top_artists`, {
+    return fetch(`${local}/api/v1/top_artists`, {
       headers: headers(),
       method: "POST"
     })
@@ -68,7 +71,7 @@ export function fetchArtists() {
 
 export const fetchRelatedArtists = state => {
   return dispatch => {
-    return fetch(`http://localhost:3000/api/v1/related_artists`, {
+    return fetch(`${local}/api/v1/related_artists`, {
       headers: headers(),
       method: "POST",
       body: JSON.stringify(state)
@@ -88,7 +91,7 @@ function fetchShows(relatedArtists, dispatch) {
     type: "FETCH_RELATED_ARTISTS",
     payload: relatedArtists.related_artists
   });
-  return fetch("http://localhost:3000/api/v1/shows", {
+  return fetch(`${local}/api/v1/shows`, {
     headers: headers(),
     method: "POST",
     body: JSON.stringify(relatedArtists)
@@ -109,7 +112,7 @@ export const clearShows = () => {
 
 export function saveShow(show, token) {
   return dispatch => {
-    fetch("http://localhost:3000/api/v1/save_show", {
+    fetch(`${local}/api/v1/save_show`, {
       headers: headers(),
       method: "POST",
       body: JSON.stringify({ show, token })
@@ -121,7 +124,7 @@ export function saveShow(show, token) {
 
 export function removeShow(show, token) {
   return dispatch => {
-    fetch("http://localhost:3000/api/v1/remove_show", {
+    fetch(`${local}/api/v1/remove_show`, {
       headers: headers(),
       method: "POST",
       body: JSON.stringify({ show, token })
@@ -133,7 +136,7 @@ export function removeShow(show, token) {
 
 export function fetchSavedShows(token) {
   return dispatch => {
-    fetch("http://localhost:3000/api/v1/index", {
+    fetch(`${local}/api/v1/index`, {
       headers: headers(),
       method: "POST",
       body: JSON.stringify({ token })
